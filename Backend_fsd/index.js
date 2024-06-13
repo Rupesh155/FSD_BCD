@@ -38,7 +38,7 @@ app.post('/signup', async(req,res)=>{
           })
    
    
-
+ʔ¿
           await dbUser.save()
         
           res.send('ho gyaa signupppp')
