@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import axios from 'axios'
 const Singup = () => {
     let [input,SetInput]=useState({
         firstName:"",
@@ -13,9 +13,23 @@ const Singup = () => {
         let {name,value}= e.target
         SetInput({...input,[name]:value})
     }
-    function done(e){
+
+    // let done = async()=>{
+
+    // }
+    async  function done(e){
         e.preventDefault();
-        console.log('ehehe',input);
+            console.log('chilclclc');
+          let res=   await  axios.post('http://localhost:5000/signup',input)
+          if(res.data=='ho gyaa signupppp'){
+            alert('signup done')
+          }
+  
+
+   
+          console.log(res,"heheheheheh");
+
+        // console.log('ehehe',input);
        
     }
   return (

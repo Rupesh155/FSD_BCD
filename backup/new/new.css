@@ -1,0 +1,39 @@
+/* .container{
+    height: 2000px;
+    padding: 100px;
+    border: 20px solid;
+} */
+
+.container{
+    height: 2000px;
+    padding: 200px;
+    border:  10px solid green;
+}
+.box{
+    border: 2px solid red;
+    padding: 20px;
+    background-color: greenyellow;
+    position: sticky;
+    top: 30px;
+}
+/* .box{
+    border: 2px solid green;
+    padding: 10px;
+    position: sticky;
+    top: 20px;
+    background-color: red;
+} */
+
+.parent{
+    height: 300px;
+    width: 300px;
+    background-color: green;
+    position: relative;
+}
+.child{
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    top: 15px;
+    background-color: rgba(107, 26, 26, 0.35)
+}

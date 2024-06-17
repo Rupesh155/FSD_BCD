@@ -2,7 +2,10 @@ let express=   require('express')
 let mongoose=   require('mongoose')
 let User=require('./model/model')
 let bcrypt=   require('bcrypt')
-let jwt=require('jsonwebtoken')
+let jwt=require('jsonwebtoken') 
+let app=  express()
+let cors=require('cors')
+app.use(cors())
 mongoose.connect('mongodb://127.0.0.1:27017/fsd78').then(()=>{
     console.log('chal gyaa');
 }).catch(()=>{
@@ -10,14 +13,13 @@ mongoose.connect('mongodb://127.0.0.1:27017/fsd78').then(()=>{
 
 })
 
-let app=  express()
+
 app.use(express.json())
 
 app.get('/',(req,res)=>{
     
     // res.send('ehhe')
 })
-
 app.post('/signup', async(req,res)=>{
     console.log(req.body);
     let userData=req.body
@@ -37,8 +39,6 @@ app.post('/signup', async(req,res)=>{
             passWord:userData.passWord
           })
    
-   
-ʔ¿
           await dbUser.save()
         
           res.send('ho gyaa signupppp')
