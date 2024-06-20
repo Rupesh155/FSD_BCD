@@ -1,32 +1,28 @@
-.parent{
+#parent{
+    height: 400px;
     border: 2px solid green;
-    height: 700px;
     display: flex;
-    /* justify-content: center; */
-    /* justify-content: space-around; * /
-    justify-content: space-between;
-    /* justify-content: space-evenly; */
-    /* flex-wrap: wrap; */
     align-items: center;
-
-    /* flex-direction:row; */
-    /* flex-direction: column; */
-    /* flex-direction: row-reverse; */
-    /* flex-direction: column; */
+    justify-content: center;
+    /* justify-content: space-around; */
+    /* justify-content: space-evenly; */
+    /* flex-direction: column-reverse; */
+    /* flex-wrap: wrap; */
 }
-.class{
-    height: 150px;
-    width: 150px;
+
+.two{
+    height: 100px;
+    width: 100px;
 }
 #one{
-    background-color: aqua;
+    background-color: red;
 }
 #two{
-    background-color: rgb(255, 0, 208);
+    background-color: rgb(0, 255, 21);
 }
 #three{
-    background-color: rgb(0, 255, 0);
+    background-color: rgb(38, 0, 255);
 }
 #four{
-    background-color: rgb(255, 166, 0);
+    background-color: rgb(229, 255, 0);
 }

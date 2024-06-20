@@ -21,6 +21,7 @@ const Singup = () => {
         e.preventDefault();
             console.log('chilclclc');
           let res=   await  axios.post('http://localhost:5000/signup',input)
+          localStorage.setItem('userData',res.data)
           if(res.data=='ho gyaa signupppp'){
             alert('signup done')
           }
