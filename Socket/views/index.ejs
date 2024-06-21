@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,35 +6,122 @@
     <title>Document</title>
 </head>
 <body>
-    <h2> heheheeheh</h2>
+    <h2>Chat app </h2>
     <ul id="messages"></ul>
     <form id="form" action="">
-      <input id="input" autocomplete="off" /><button>Send</button>
+      <input id="input"  /><button>Send</button>
     </form>
     <script src="/socket.io/socket.io.js"></script>
+<script>
+  const socket = io();
+  const form = document.getElementById('form');
+  const input = document.getElementById('input');
+  const messages  = document.getElementById('messages');
+
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (input.value) {
+      socket.emit('chat message', input.value);
+      input.value = '';
+    }
+  });
+
+
+
+  socket.on('chat message', (msg) => {
+    const item = document.createElement('li');
+    item.innerText = msg;
+    messages.appendChild(item);
+  });
+
+</script>
+ 
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="login">
+        <h2>Enter your username</h2>
+        <input id="username" placeholder="Username">
+        <button id="join-btn">Join Chat</button>
+    </div>
+    <div id="chat" style="display: none;">
+        <h2>Chat App</h2>
+        <div id="users">
+            <h4>Active Users:</h4>
+            <ul id="user-list"></ul>
+        </div>
+        <ul id="messages"></ul>
+        <form id="form" action="">
+            <input id="input" autocomplete="off" /><button>Send</button>
+        </form>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
     <script>
-      const socket = io();
-    
-      const form = document.getElementById('form');
-      const input = document.getElementById('input');
-      const messages = document.getElementById('messages');
-    
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        if (input.value) {
-          socket.emit('chat message', input.value);
-          input.value = '';
-        }
-      });
-    
-      socket.on('chat message', (msg) => {
-        const item = document.createElement('li');
-        item.textContent = msg;
-        messages.appendChild(item);
-        window.scrollTo(0, document.body.scrollHeight);
-      });
+        const socket = io();
+        const loginDiv = document.getElementById('login');
+        const chatDiv = document.getElementById('chat');
+        const usernameInput = document.getElementById('username');
+        const joinBtn = document.getElementById('join-btn');
+        const form = document.getElementById('form');
+        const input = document.getElementById('input');
+        const messages = document.getElementById('messages');
+        const userList = document.getElementById('user-list');
+
+        joinBtn.addEventListener('click', () => {
+            const username = usernameInput.value;
+            if (username) {
+                socket.emit('join', username);
+                loginDiv.style.display = 'none';
+                chatDiv.style.display = 'block';
+            }
+        });
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (input.value) {
+                socket.emit('chat message', input.value);
+                input.value = '';
+            }
+        });
+
+        socket.on('chat message', (msg) => {
+            const item = document.createElement('li');
+            item.innerText = `${msg.username}: ${msg.message}`;
+            messages.appendChild(item);
+            window.scrollTo(0, document.body.scrollHeight);
+        });
+
+        socket.on('update users', (users) => {
+            userList.innerHTML = '';
+            users.forEach(user => {
+                const item = document.createElement('li');
+                item.innerText = user;
+                userList.appendChild(item);
+            });
+        });
+
+        socket.on('user connected', (username) => {
+            const item = document.createElement('li');
+            item.innerText = `${username} connected`;
+            messages.appendChild(item);
+        });
+
+        socket.on('user disconnected', (username) => {
+            const item = document.createElement('li');
+            item.innerText = `${username} disconnected`;
+            messages.appendChild(item);
+        });
     </script>
-
-
 </body>
 </html>
