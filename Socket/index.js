@@ -55,7 +55,7 @@ const server = createServer(app);
 const io = new Server(server);
 
 app.set('view engine', 'ejs');
-app.use(express.static(__dirname + '/public'));
+app.use(express.static('public'));
 
 app.get('/', (req, res) => {
   res.render('index');
@@ -65,17 +65,18 @@ let users = {};
 
 io.on('connection', (socket) => {
     console.log('a user connected');
-
+    // console.log(socket,"soscksmn");
     socket.on('join', (username) => {
         users[socket.id] = username;
+        console.log(users,"usersss");
         socket.broadcast.emit('user connected', username);
         io.emit('update users', Object.values(users));
     });
 
     socket.on('chat message', (msg) => {
         const messageData = {
-            username: users[socket.id],
-            message: msg
+          username: users[socket.id],
+          message: msg
         };
         io.emit('chat message', messageData);
     });
@@ -90,5 +91,13 @@ io.on('connection', (socket) => {
 });
 
 server.listen(3000, () => {
-  console.log('server running at http://localhost:3000');
+  console.log('server running ');
 });
+
+
+// let users={
+//   jshcdbsu:'rupesh',
+//   djhbuf:"ravi"
+
+
+// }

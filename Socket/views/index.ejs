@@ -99,7 +99,7 @@
             const item = document.createElement('li');
             item.innerText = `${msg.username}: ${msg.message}`;
             messages.appendChild(item);
-            window.scrollTo(0, document.body.scrollHeight);
+   
         });
 
         socket.on('update users', (users) => {
